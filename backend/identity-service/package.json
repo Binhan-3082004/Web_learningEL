@@ -1,0 +1,20 @@
+{
+  "name": "identity-service",
+  "version": "1.0.0",
+  "description": "Dịch vụ định danh: đăng ký, đăng nhập, JWT, phân quyền, quản lý người dùng",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node src/scripts/seedAdmin.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-auth-library": "^11.3.4",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.0"
+  }
+}

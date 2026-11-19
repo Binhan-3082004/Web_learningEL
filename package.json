@@ -1,0 +1,19 @@
+{
+  "name": "english-learning-ms",
+  "version": "1.0.0",
+  "description": "Hệ thống học tiếng Anh - ReactJS (frontend) + Node.js Microservices (backend)",
+  "private": true,
+  "scripts": {
+    "setup:env": "node scripts/setup-env.js",
+    "install:all": "npm --prefix backend/api-gateway install && npm --prefix backend/identity-service install && npm --prefix backend/learning-service install && npm --prefix frontend install",
+    "seed:admin": "npm --prefix backend/identity-service run seed",
+    "dev:gateway": "npm --prefix backend/api-gateway run dev",
+    "dev:identity": "npm --prefix backend/identity-service run dev",
+    "dev:learning": "npm --prefix backend/learning-service run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev": "concurrently -n gateway,identity,learning,frontend -c blue,green,yellow,magenta \"npm:dev:gateway\" \"npm:dev:identity\" \"npm:dev:learning\" \"npm:dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
