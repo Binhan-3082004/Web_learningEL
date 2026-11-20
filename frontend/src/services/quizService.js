@@ -2,8 +2,12 @@
 import { apiClient } from './apiClient';
 import { API_ENDPOINTS } from '../constants/apiEndpoints';
 
-export async function startQuiz({ lessonId, count = 10 }) {
-  const { data } = await apiClient.post(API_ENDPOINTS.LEARNING.QUIZ_START, { lessonId, count });
+// count = undefined → server tự quyết dùng QuizQuestionCount của bài (nếu có lessonId)
+export async function startQuiz({ lessonId, count } = {}) {
+  const body = {};
+  if (lessonId !== undefined) body.lessonId = lessonId;
+  if (count !== undefined) body.count = count;
+  const { data } = await apiClient.post(API_ENDPOINTS.LEARNING.QUIZ_START, body);
   return data;
 }
 

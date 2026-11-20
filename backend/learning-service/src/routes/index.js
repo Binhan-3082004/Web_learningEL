@@ -5,6 +5,7 @@ const lessonRoutes = require('./lessonRoutes');
 const vocabularyRoutes = require('./vocabularyRoutes');
 const flashcardRoutes = require('./flashcardRoutes');
 const quizRoutes = require('./quizRoutes');
+const quizSetRoutes = require('./quizSetRoutes');
 const examRoutes = require('./examRoutes');
 const progressRoutes = require('./progressRoutes');
 
@@ -14,7 +15,8 @@ router.use('/lessons', lessonRoutes);
 router.use('/vocabularies', vocabularyRoutes);
 router.use('/flashcards', flashcardRoutes);
 router.use('/quiz', quizRoutes);
+router.use('/quiz-sets', quizSetRoutes);
 router.use('/exams', examRoutes);
-router.use(progressRoutes); // /progress, /sessions, /mistakes, /ranking/me
+router.use(progressRoutes);
 
 module.exports = router;

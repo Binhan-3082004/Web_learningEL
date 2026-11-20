@@ -10,8 +10,12 @@ const pool = mysql.createPool({
   dateStrings: ['DATE'],
 });
 
-// Đồng bộ múi giờ phiên MySQL với múi giờ của mysql2 để NOW() và Date của JS khớp nhau
-pool.pool.on('connection', (connection) => connection.query(`SET time_zone = '${config.db.timezone}'`));
+// Đồng bộ múi giờ + encoding UTF-8 cho mỗi connection mới
+// SET NAMES utf8mb4 bắt buộc để tiếng Việt không bị vỡ
+pool.pool.on('connection', (connection) => {
+  connection.query(`SET NAMES utf8mb4`);
+  connection.query(`SET time_zone = '${config.db.timezone}'`);
+});
 
 /**
  * Chạy nhiều câu SQL trong một transaction.

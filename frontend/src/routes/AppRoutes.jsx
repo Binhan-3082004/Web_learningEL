@@ -10,11 +10,17 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import LessonListPage from '../pages/LessonListPage';
 import LessonDetailPage from '../pages/LessonDetailPage';
+import QuizListPage from '../pages/QuizListPage';
 import QuizPage from '../pages/QuizPage';
 import ExamListPage from '../pages/ExamListPage';
 import ExamPage from '../pages/ExamPage';
 import ProgressPage from '../pages/ProgressPage';
 import AdminDashboardPage from '../pages/AdminDashboardPage';
+import AdminLessonsPage from '../pages/AdminLessonsPage';
+import AdminVocabulariesPage from '../pages/AdminVocabulariesPage';
+import AdminGrammarsPage from '../pages/AdminGrammarsPage';
+import AdminExamsPage from '../pages/AdminExamsPage';
+import AdminQuizPage from '../pages/AdminQuizPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import GoogleCallbackPage from '../pages/GoogleCallbackPage';
 
@@ -36,8 +42,8 @@ export default function AppRoutes() {
         {/* Cần đăng nhập */}
         <Route element={<ProtectedRoute />}>
           <Route path="/lessons/:lessonId" element={<LessonDetailPage />} />
-          <Route path="/quiz" element={<QuizPage />} />
-          <Route path="/quiz/:lessonId" element={<QuizPage />} />
+          <Route path="/quiz" element={<QuizListPage />} />
+          <Route path="/quiz/:id" element={<QuizPage />} />
           <Route path="/exams" element={<ExamListPage />} />
           <Route path="/exam/:examId" element={<ExamPage />} />
           <Route path="/progress" element={<ProgressPage />} />
@@ -46,6 +52,11 @@ export default function AppRoutes() {
         {/* Chỉ Admin */}
         <Route element={<ProtectedRoute roles={[ROLES.ADMIN]} />}>
           <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/admin/lessons" element={<AdminLessonsPage />} />
+          <Route path="/admin/vocabularies" element={<AdminVocabulariesPage />} />
+          <Route path="/admin/grammars" element={<AdminGrammarsPage />} />
+          <Route path="/admin/exams" element={<AdminExamsPage />} />
+          <Route path="/admin/quiz" element={<AdminQuizPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

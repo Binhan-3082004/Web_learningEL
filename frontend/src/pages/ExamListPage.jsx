@@ -1,4 +1,4 @@
-// Danh sách đề thi thử (bao gồm bài kiểm tra xếp trình độ)
+﻿// Danh sách đề thi thử (bao gồm bài kiểm tra xếp trình độ)
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getExams } from '../services/examService';
@@ -20,7 +20,7 @@ export default function ExamListPage() {
   if (!exams) return <Loading />;
 
   return (
-    <div>
+    <div className="mx-auto w-full max-w-5xl px-4 py-6">
       <h1 className="text-2xl font-bold">Thi thử</h1>
       {exams.length === 0 && <p className="mt-4 text-gray-500">Chưa có đề thi nào.</p>}
       <ul className="mt-4 space-y-3">

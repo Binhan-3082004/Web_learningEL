@@ -33,7 +33,7 @@ export default function GoogleCallbackPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex h-[70vh] items-center justify-center">
       <p className="text-gray-500">Đang xử lý đăng nhập Google...</p>
     </div>
   );

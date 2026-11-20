@@ -1,4 +1,4 @@
-// Tiến độ & thành tích: bài học đã hoàn thành, điểm các lần làm bài, chuỗi ngày học, điểm yếu
+﻿// Tiến độ & thành tích: bài học đã hoàn thành, điểm các lần làm bài, chuỗi ngày học, điểm yếu
 import { useEffect, useState } from 'react';
 import { getMistakes, getProgress } from '../services/progressService';
 import { getErrorMessage } from '../utils/getErrorMessage';
@@ -34,7 +34,7 @@ export default function ProgressPage() {
   if (!progress || !mistakes) return <Loading />;
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto w-full max-w-5xl px-4 py-6 space-y-6">
       <h1 className="text-2xl font-bold">Tiến độ học tập</h1>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">

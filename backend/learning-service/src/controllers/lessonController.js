@@ -3,7 +3,7 @@ const lessonService = require('../services/lessonService');
 const { parseId } = require('../validators/commonValidator');
 
 async function listLessons(req, res) {
-  const userId = req.user ? req.user.id : 0; // 0 = khách chưa đăng nhập
+  const userId = req.user ? req.user.id : 0; 
   res.json(await lessonService.listLessons({ userId, level: req.query.level }));
 }
 

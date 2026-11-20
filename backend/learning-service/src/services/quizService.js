@@ -4,6 +4,7 @@ const vocabularyModel = require('../models/vocabularyModel');
 const practiceSessionModel = require('../models/practiceSessionModel');
 const practiceMistakeModel = require('../models/practiceMistakeModel');
 const quizItemModel = require('../models/quizItemModel');
+const lessonModel = require('../models/lessonModel');
 const { addPoints } = require('./pointService');
 const HttpError = require('../utils/HttpError');
 const { shuffleArray } = require('../utils/arrayHelpers');
@@ -40,14 +41,23 @@ function buildQuestion(vocabulary, questionIndex, distractorCandidates) {
 }
 
 async function startQuiz(userId, { lessonId, level, count }) {
-  const questionCount = count === undefined ? DEFAULT_QUESTION_COUNT : Number(count);
-  if (!Number.isInteger(questionCount) || questionCount < MIN_QUESTION_COUNT || questionCount > MAX_QUESTION_COUNT) {
-    throw new HttpError(400, `Số câu phải từ ${MIN_QUESTION_COUNT} đến ${MAX_QUESTION_COUNT}`);
-  }
-
   const hasLesson = lessonId !== undefined && lessonId !== null;
   const parsedLessonId = hasLesson ? parseId(lessonId, 'Mã bài học') : null;
   const parsedLevel = level ? parseLevel(level) : null;
+
+  // Nếu có lessonId và client không gửi count → dùng QuizQuestionCount của bài học
+  let resolvedCount = count === undefined ? DEFAULT_QUESTION_COUNT : Number(count);
+  if (count === undefined && parsedLessonId) {
+    const lesson = await lessonModel.findById(parsedLessonId);
+    if (lesson && lesson.QuizQuestionCount) {
+      resolvedCount = Number(lesson.QuizQuestionCount);
+    }
+  }
+
+  const questionCount = resolvedCount;
+  if (!Number.isInteger(questionCount) || questionCount < MIN_QUESTION_COUNT || questionCount > MAX_QUESTION_COUNT) {
+    throw new HttpError(400, `Số câu phải từ ${MIN_QUESTION_COUNT} đến ${MAX_QUESTION_COUNT}`);
+  }
 
   const vocabularies = await vocabularyModel.findRandomForQuiz({
     lessonId: parsedLessonId,

@@ -30,6 +30,7 @@ router.delete('/grammars/:id', asyncHandler(grammarController.deleteGrammar));
 // Bài học
 router.get('/lessons', asyncHandler(lessonController.listLessons));
 router.post('/lessons', asyncHandler(lessonController.createLesson));
+router.get('/lessons/:id', asyncHandler(lessonController.getLessonById));
 router.put('/lessons/:id', asyncHandler(lessonController.updateLesson));
 router.delete('/lessons/:id', asyncHandler(lessonController.deleteLesson));
 
@@ -47,5 +48,16 @@ router.delete('/questions/:id', asyncHandler(examController.deleteQuestion));
 
 // Thống kê
 router.get('/stats', asyncHandler(statisticsController.getStatistics));
+
+// Quiz Sets (độc lập, không liên quan bài học)
+const quizSetController = require('../controllers/admin/quizSetController');
+router.get('/quiz-sets', asyncHandler(quizSetController.listQuizSets));
+router.post('/quiz-sets', asyncHandler(quizSetController.createQuizSet));
+router.put('/quiz-sets/:id', asyncHandler(quizSetController.updateQuizSet));
+router.delete('/quiz-sets/:id', asyncHandler(quizSetController.deleteQuizSet));
+router.get('/quiz-sets/:id/questions', asyncHandler(quizSetController.listQuestions));
+router.post('/quiz-sets/:id/questions', asyncHandler(quizSetController.addQuestion));
+router.put('/quiz-set-questions/:id', asyncHandler(quizSetController.updateQuestion));
+router.delete('/quiz-set-questions/:id', asyncHandler(quizSetController.deleteQuestion));
 
 module.exports = router;

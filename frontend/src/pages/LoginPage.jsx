@@ -41,7 +41,7 @@ export default function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5 px-3 ">
       <h1 className="text-xl font-bold">Đăng nhập</h1>
       <ErrorMessage message={errorMessage} />
 
@@ -50,26 +50,28 @@ export default function LoginPage() {
         <input
           value={usernameOrEmail}
           onChange={(event) => setUsernameOrEmail(event.target.value)}
-          className="mt-1 w-full rounded border p-2"
+          placeholder='Nhập tên đăng nhập hoặc email'
+          className="mt-2 w-full rounded-xl border p-2.5 "
           required
           autoFocus
         />
       </label>
 
-      <label className="block">
+      <label className="block mb-1">
         <span className="text-sm font-medium">Mật khẩu</span>
         <input
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          className="mt-1 w-full rounded border p-2"
+          placeholder='Nhập mật khẩu'
+          className="mt-2 w-full  rounded-xl border p-2.5"
           required
         />
       </label>
 
 
 
-      <button disabled={isSubmitting} className="w-full rounded bg-blue-600 py-2 font-medium text-white disabled:opacity-60">
+      <button disabled={isSubmitting} className="w-full rounded-xl bg-blue-600 py-2.5 font-medium text-white disabled:opacity-60">
         {isSubmitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
       </button>
 
@@ -77,15 +79,15 @@ export default function LoginPage() {
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200" />
         </div>
-        <div className="relative flex justify-center text-sm">
+        <div className="relative flex justify-center text-sm mt-1">
           <span className="bg-white px-2 text-gray-400">hoặc</span>
         </div>
       </div>
       <a
         href={GOOGLE_AUTH_URL}
-        className="flex w-full items-center justify-center gap-2 rounded border border-gray-300 py-2 text-sm font-medium hover:bg-gray-50"
+        className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 py-2 text-sm font-medium hover:bg-gray-50"
       >
-        <svg className="h-5 w-5" viewBox="0 0 48 48">
+        <svg className="h-7 w-5" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.2l6.7-6.7C35.8 2.5 30.2 0 24 0 14.7 0 6.7 5.4 2.6 13.3l7.8 6C12.4 13 17.8 9.5 24 9.5z" />
           <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4 7.1-10 7.1-17z" />
           <path fill="#FBBC05" d="M10.4 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.9-4.7l-7.8-6A23.8 23.8 0 0 0 0 24c0 3.8.9 7.4 2.6 10.6l7.8-5.9z" />
@@ -93,8 +95,11 @@ export default function LoginPage() {
         </svg>
         Đăng nhập bằng Google
       </a>
+      <p className="text-center text-sm text-gray-900 mt-2">
+        Chưa có tài khoản? <Link to="/register" className="text-blue-600 font-bold">Đăng ký</Link>
+      </p>
       <p className="text-center text-sm text-gray-600">
-        Chưa có tài khoản? <Link to="/register" className="text-blue-600">Đăng ký</Link>
+        <Link to="/" className="font-medium text-blue-600"> Quay lại trang chủ </Link>
       </p>
     </form>
   );

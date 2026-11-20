@@ -1,4 +1,4 @@
-// Thi thử có đồng hồ đếm ngược, tự nộp khi hết giờ. Route: /exam/:examId
+﻿// Thi thử có đồng hồ đếm ngược, tự nộp khi hết giờ. Route: /exam/:examId
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { startExam, submitExam } from '../services/examService';
@@ -56,44 +56,48 @@ export default function ExamPage() {
 
   if (result) {
     return (
-      <div className="mx-auto max-w-xl text-center">
-        <h2 className="text-2xl font-bold">Điểm: {result.score}% ({result.correct}/{result.total})</h2>
-        {result.suggestedLevel && <p className="mt-2">Trình độ đề xuất: <b>{result.suggestedLevel}</b></p>}
-        <p className="mt-1 text-gray-600">+{result.pointsAwarded} điểm</p>
+      <div className="mx-auto w-full max-w-5xl px-4 py-6">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="text-2xl font-bold">Điểm: {result.score}% ({result.correct}/{result.total})</h2>
+          {result.suggestedLevel && <p className="mt-2">Trình độ đề xuất: <b>{result.suggestedLevel}</b></p>}
+          <p className="mt-1 text-gray-600">+{result.pointsAwarded} điểm</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-2xl">
-      <div className="sticky top-0 flex items-center justify-between bg-gray-50 py-2">
-        <h1 className="text-xl font-bold">{exam.title}</h1>
-        <span className={`rounded px-3 py-1 font-mono ${secondsLeft < WARNING_SECONDS ? 'bg-red-100 text-red-700' : 'bg-gray-200'}`}>
-          {formatCountdown(secondsLeft)}
-        </span>
-      </div>
-
-      {exam.questions.map((question, index) => (
-        <div key={question.id} className="mt-6">
-          <p className="font-medium">{index + 1}. {question.content}</p>
-          {question.audioUrl && <audio controls src={question.audioUrl} className="mt-2" />}
-          <div className="mt-2 grid gap-1">
-            {Object.entries(question.options).map(([optionKey, optionText]) => (
-              <label key={optionKey} className="flex cursor-pointer items-center gap-2 rounded border bg-white p-2 hover:bg-gray-50">
-                <input
-                  type="radio"
-                  name={`question-${question.id}`}
-                  checked={answers[question.id] === optionKey}
-                  onChange={() => setAnswers({ ...answers, [question.id]: optionKey })}
-                />
-                <span>{optionKey}. {optionText}</span>
-              </label>
-            ))}
-          </div>
+    <div className="mx-auto w-full max-w-5xl px-4 py-6">
+      <div className="mx-auto max-w-2xl">
+        <div className="sticky top-0 flex items-center justify-between bg-gray-50 py-2">
+          <h1 className="text-xl font-bold">{exam.title}</h1>
+          <span className={`rounded px-3 py-1 font-mono ${secondsLeft < WARNING_SECONDS ? 'bg-red-100 text-red-700' : 'bg-gray-200'}`}>
+            {formatCountdown(secondsLeft)}
+          </span>
         </div>
-      ))}
 
-      <button onClick={handleSubmit} className="mt-8 rounded bg-green-600 px-5 py-2 text-white">Nộp bài</button>
+        {exam.questions.map((question, index) => (
+          <div key={question.id} className="mt-6">
+            <p className="font-medium">{index + 1}. {question.content}</p>
+            {question.audioUrl && <audio controls src={question.audioUrl} className="mt-2" />}
+            <div className="mt-2 grid gap-1">
+              {Object.entries(question.options).map(([optionKey, optionText]) => (
+                <label key={optionKey} className="flex cursor-pointer items-center gap-2 rounded border bg-white p-2 hover:bg-gray-50">
+                  <input
+                    type="radio"
+                    name={`question-${question.id}`}
+                    checked={answers[question.id] === optionKey}
+                    onChange={() => setAnswers({ ...answers, [question.id]: optionKey })}
+                  />
+                  <span>{optionKey}. {optionText}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <button onClick={handleSubmit} className="mt-8 rounded bg-green-600 px-5 py-2 text-white">Nộp bài</button>
+      </div>
     </div>
   );
 }

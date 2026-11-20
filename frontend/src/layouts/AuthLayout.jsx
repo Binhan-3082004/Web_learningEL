@@ -4,12 +4,12 @@ import logo from '../assets/logo.svg';
 
 export default function AuthLayout() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4">
-      <Link to="/" className="mb-6 flex items-center gap-2 text-2xl font-bold text-blue-700">
-        <img src={logo} alt="" className="h-10 w-10" />
+    <div className="flex min-h-screen flex-col items-center overflow-y-auto px-4 py-4 sm:py-6">
+      <Link to="/" className="mb-6 flex items-center gap-3 text-2xl font-bold text-blue-700">
+        <img src={logo} alt="" className="h-10 w-10 rounded-lg" />
         English Learning
       </Link>
-      <div className="w-full max-w-md rounded-lg border bg-white p-6 shadow-sm">
+      <div className="w-full max-w-[440px] rounded-[20px] border border-gray-200 bg-white px-7 py-8 shadow-[0_2px_12px_rgba(15,23,42,0.10)] sm:px-8">
         <Outlet />
       </div>
     </div>

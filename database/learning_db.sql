@@ -5,12 +5,13 @@ CREATE DATABASE IF NOT EXISTS learning_db CHARACTER SET utf8mb4 COLLATE utf8mb4_
 USE learning_db;
 
 CREATE TABLE IF NOT EXISTS Lessons (
-  Id          INT AUTO_INCREMENT PRIMARY KEY,
-  Title       VARCHAR(256) NOT NULL,
-  Level       VARCHAR(10)  NOT NULL,             -- A1..C2
-  Description TEXT NULL,
-  SortOrder   INT NOT NULL DEFAULT 0,
-  CreatedAt   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  Id                 INT AUTO_INCREMENT PRIMARY KEY,
+  Title              VARCHAR(256) NOT NULL,
+  Level              VARCHAR(10)  NOT NULL,             -- A1..C2
+  Description        TEXT NULL,
+  SortOrder          INT NOT NULL DEFAULT 0,
+  QuizQuestionCount  INT NOT NULL DEFAULT 10,           -- Số câu hỏi Quiz do admin cấu hình
+  CreatedAt          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX idx_lessons_level (Level, SortOrder)
 ) ENGINE=InnoDB;
 
